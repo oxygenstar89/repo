@@ -1,0 +1,17 @@
+[data-theme="light"] {
+  --table-background-color: rgb(233, 237, 241);
+  --table-items-color: rgb(14, 15, 26);
+  --table-row-background-color: rgb(220, 225, 229);
+  --table-row-hover-background-color: rgb(201, 209, 216);
+  --table-header-background-color: rgb(127, 127, 137);
+  --table-separator-color: rgb(40, 38, 49);
+}
+
+[data-theme="dark"] {
+  --table-background-color: rgb(42, 56, 71);
+  --table-items-color: rgb(198, 210, 219);
+  --table-row-background-color: rgba(14, 15, 26, .25);
+  --table-row-hover-background-color: rgba(53, 71, 89, .5);
+  --table-header-background-color: rgba(14, 15, 26, .15);
+  --table-separator-color: rgb(158, 151, 186);
+}

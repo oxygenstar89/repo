@@ -1,0 +1,80 @@
+<table cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Symbol</th>
+      <th></th>
+      <th>Order ID</th>
+      <th>Side</th>
+      <th>Size</th>
+      <th>Open Time</th>
+      <th>Open Price</th>
+      <th>Swap</th>
+      <th>Profit</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(group of tableData | keyvalue; track group.key) {
+      <tr
+        class="group"
+        [class.active]="group.value.open"
+        (click)="group.value.open = !group.value.open"
+      >
+        <td><span class="arrow"></span></td>
+        <td>{{group.key}}</td>
+        <td>
+            <span class="number-of-items">{{group.value.data.length}}</span>
+        </td>
+        <td></td>
+        <td></td>
+        <td>{{(group.value.totalSize | number: '1.0-5')!.replaceAll(',', '')}}</td>
+        <td></td>
+        <td class="align-right">{{(group.value.averageOpenPrice | number: '1.0-2')!.replaceAll(',', '')}}</td>
+        <td>{{(group.value.totalSwap | number: '1.0-5')!.replaceAll(',', '')}}</td>
+        <td
+          class="profit"
+          [class.negative]="group.value.averageProfit < 0"
+        >{{(group.value.averageProfit | number: '1.0-5')!.replaceAll(',', '')}}</td>
+        <td>
+          <button (click)="remove(group.key)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px">
+              <use xlink:href="assets/icons.svg#remove-group"></use>
+            </svg>
+          </button>
+        </td>
+      </tr>
+      @if(group.value.open) {
+        @for(item of group.value.data; let index = $index; track item.id)
+        {
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{item.id}}</td>
+            <td>{{item.side}}</td>
+            <td>{{item.size}}</td>
+            <td>{{item.openTime | date: "dd.MM.YYYY HH:mm:ss"}}</td>
+            <td class="align-right">{{item.openPrice}}</td>
+            <td>{{item.swap}}</td>
+            <td
+              class="profit"
+              [class.negative]="item.profit < 0"
+            >{{(item.profit | number: '1.0-5')!.replaceAll(',', '')}}</td>
+            <td>
+              <button (click)="remove(group.key, index)">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px">
+                  <use xlink:href="assets/icons.svg#remove"></use>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        }
+      }
+    } @empty {
+      <tr>
+        <td colspan="11" class="no-data">No data to show</td>
+      </tr>
+    }
+  </tbody>
+</table>

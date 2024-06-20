@@ -1,0 +1,94 @@
+table {
+  width: 100%;
+  background-color: var(--table-background-color);
+
+  th {
+    background-color: var(--table-header-background-color);
+    text-align: left;
+  }
+
+  tr {
+    color: var(--table-items-color);
+
+    td, th {
+      padding: 5px;
+    }
+
+    td {
+      &.align-right {
+        text-align: right;
+      }
+
+      &.profit {
+        color: green;
+
+        &.negative {
+          color: lightcoral;
+        }
+      }
+    }
+
+    .arrow {
+      color: rgb(97, 97, 224);
+      font-weight: 700;
+      position: relative;
+      margin-right: 8px;
+
+      &:after {
+        content: "<";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotate(-90deg);
+      }
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      background: transparent;
+      margin: 0;
+
+      svg {
+        fill: rgb(97, 97, 224);
+      }
+    }
+
+    .number-of-items {
+      border-radius: 50%;
+      background-color: rgba(14, 15, 26, 0.5);
+      width: 20px;
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      justify-content: center;
+    }
+
+    .no-data {
+      text-align: center;
+    }
+
+    &.group {
+      cursor: pointer;
+
+      &:not(:first-child) td {
+        border-top: 1px solid var(--table-separator-color);
+      }
+    }
+
+
+    &.active {
+
+      .arrow:after {
+        transform: rotate(90deg);
+      }
+    }
+
+    &:hover {
+      background-color: var(--table-row-hover-background-color);
+    }
+  }
+
+}
